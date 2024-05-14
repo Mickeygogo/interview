@@ -1,0 +1,112 @@
+.sendContainer {
+    width: 100%;
+    position: relative;
+}
+.textAreaWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+
+}
+.textArea {
+    width: 100%;
+    min-height: 46px !important;
+    font-size: 18px;
+    line-height: 46px !important;
+    resize:none !important;
+    background-color: #fff;
+    :global(.ant-input-clear-icon){
+        font-size: 16px;
+        height: 100%;
+        margin-top: -6px;
+        display: flex;
+        align-items: center;
+    }
+}
+.sendButton {
+    display: flex;
+    padding: 0 10px;
+    justify-content: center;
+    align-items: center;
+    /* // background-color: #f56a00; */
+}
+.sendIcon {
+    /* transform: rotate(90deg); */
+    font-size: 28px;
+    color:#997b66;
+    background-color: #fff;
+    background:'';
+    border-radius: 50%;
+}
+.abortIcon {
+    font-size: 24px;
+    color:#545252;
+    background-color: #fff;
+    background:'';
+    border-radius: 50%;
+}
+.uploadIcon {
+    font-size: 28px;
+    color:#ccc;
+    background-color: #fff;
+    background:'';
+    border-radius: 50%;
+}
+.uploadFilesWrapper {
+    display: flex;
+    margin-bottom: 10px;
+    .fileStyle {
+        position: relative;
+        width:70px;
+        height:70px;
+        border-radius: 10px;
+        padding: 2px;
+        padding-bottom:10px;
+        /* // box-sizing: border-box; */
+        display: flex;
+        background-color: #fff;
+        flex-direction: column;
+        align-items:center;
+        justify-content: center;
+        margin-right:10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+        .fileStyleImage {
+            width:40px;
+            height:40px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .fileStyleText {
+            width:58px;
+            line-height: 24px;
+            font-size: 10px;
+            text-align: center;
+            white-space: nowrap; /* 保持文本在一行 */
+            overflow: hidden; /* 超出部分隐藏 */
+            text-overflow: ellipsis; /* 显示省略号 */
+        }
+        .fileStyleOtherImage {
+            width:40px;
+            height:40px;
+            color:#fff;
+            font-size:16px;
+            background-color: #1e88f9;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        .deleteUpload {
+            position: absolute;
+            font-size:20px;
+            top:-20%;
+            right:-4px;
+
+        }
+
+    }
+}

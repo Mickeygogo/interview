@@ -1,0 +1,64 @@
+.scrollListFile {
+  height: calc(100vh - 240px);
+  overflow: scroll;
+
+  .renderListItemStyle {
+    display: flex;
+    flex-direction: column;
+    background-color: #fbfaec;
+    border: 0;
+    margin-bottom: 10px;
+    .renderListItemStyleContent {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      .feedbackProblem {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #000;
+        margin-left: 20px;
+        /* // padding:10px; */
+        /* // background-color: */
+      }
+    }
+    .feedbackTextarea {
+      width: 100%;
+      margin-top: 20px;
+      text-align: right;
+      .btn {
+        margin-top: 10px;
+      }
+    }
+
+    /* // border-bottom: 1px solid #000; */
+  }
+
+  .renderListItemStyle:nth-child(even) {
+    background-color: #f2eded !important;
+  }
+  .tag {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .row {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #000;
+    .title {
+      font-size: 12px;
+      font-weight: bold;
+      margin-right: 20px;
+    }
+    .value {
+      font-size: 12px;
+      width: calc(100vw - 820px);
+      /* // background-color: red; */
+      flex-wrap: wrap;
+    }
+    /* // justify-content: space-around; */
+  }
+}

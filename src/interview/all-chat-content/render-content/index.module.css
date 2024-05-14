@@ -1,0 +1,53 @@
+.contentStyle {
+    font-size: 13px;
+    font-weight: 400;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif,
+}
+
+/* .codeWrapper {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: flex-end;
+} */
+.copyBtn {
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(225, 118, 31);
+}
+.copyText {
+    display: flex;
+    font-size: 14px;
+    color:#fff;
+}
+:global(.markDownWrapper) {
+    pre {
+        white-space: pre-wrap;
+        div {
+            white-space: pre-wrap !important;
+            code {
+                white-space: pre-wrap !important;
+                overflow-wrap: break-word !important;
+                word-break: break-word !important;
+            }
+        }
+    }
+  }
+
+  :global(.markDownWrapper) pre {
+    white-space: pre-wrap;
+    overflow-wrap: break-word !important;
+}
+
+:global(.markDownWrapper) pre div {
+    white-space: pre-wrap !important;
+    overflow-wrap: break-word !important;
+}
+
+:global(.markDownWrapper) pre div code {
+    white-space: pre-wrap !important;
+    overflow-wrap: break-word !important;
+    /* // word-break: break-word !important; */
+}
