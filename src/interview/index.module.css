@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex: 1;
+    box-sizing: border-box;
+}
+.left {
+    flex: 1;
+    box-sizing: border-box;
+    border-right: 5px solid yellowgreen;
+}
+.right {
+    flex: 2;
+    box-sizing: border-box;
+}
+.bottom {
+    height: 30%;
+    box-sizing: border-box;
+}
+.content {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}

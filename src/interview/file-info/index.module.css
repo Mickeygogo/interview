@@ -1,0 +1,18 @@
+.container {
+    width: 100%;
+    height:30vh;
+    padding:20px;
+    padding-left:40px;
+    box-sizing: border-box;
+    display: flex;
+    /* background-color: red; */
+    overflow: hidden;
+
+  }
+.containerFile {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自动填充列，最小宽度100px */
+    gap: 14px; /* 增加元素之间的间距 */
+    overflow: auto;
+}
