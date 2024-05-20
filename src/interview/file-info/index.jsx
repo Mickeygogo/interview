@@ -1,61 +1,19 @@
-import { useState } from 'react';
+import { useState,useContext  } from 'react';
 import { v4 as uuidV4 } from 'uuid';
 import { Popover } from 'antd';
 import {
     FileTextFilled,
 } from '@ant-design/icons';
+import { ChatContext } from '../context';
+import ListDetail from './list-detail';
 import styles from './index.module.css';
 
-const dataSource = [
-    {
-        id: 11,
-        knowledgeName: '运去哪官网',
-        knowledgeNum: 20
-    },
-    {
-        id: 22,
-        knowledgeName: '运去哪官网1',
-        knowledgeNum: 20
-    },
-    {
-        id: 33,
-        knowledgeName: '运去哪官网3',
-        knowledgeNum: 20
-    },
 
-    {
-        id: 44,
-        knowledgeName: '运去哪官网2',
-        knowledgeNum: 20
-    },
-    {
-        id: 55,
-        knowledgeName: '运去哪官网43',
-        knowledgeNum: 20
-    },
-    {
-        id: 66,
-        knowledgeName: '运去哪官网43',
-        knowledgeNum: 20
-    },
-    {
-        id: 77,
-        knowledgeName: '运去哪官网43',
-        knowledgeNum: 20
-    },
-    {
-        id: 88,
-        knowledgeName: '运去哪官网3',
-        knowledgeNum: 20
-    },
-    {
-        id: 99,
-        knowledgeName: '运去哪官网32',
-        knowledgeNum: 20
-    },
-]
 export default function FileInfo() {
 
+    const data = useContext(ChatContext)
+    const { sortKnowledgeDetail  } = data || {};
+    const dataSource = sortKnowledgeDetail?.map(i=>({ ...i, id: uuidV4()}))
 
     const handleCloseOther = (id) => {
         const otherDom = dataSource?.filter(i => i?.id !== id)
@@ -75,7 +33,7 @@ export default function FileInfo() {
             imageElement.style.width = '80px'; // 修改宽度
         } else {
             imageElement.src = image1
-            imageElement.style.width = '86px'; // 修改宽度
+            imageElement.style.width = '85.5px'; // 修改宽度
         }
 
     }
@@ -99,18 +57,20 @@ export default function FileInfo() {
                         return (
                             <div >
                                 <Popover
-                                    content={<a >Close</a>}
-                                    title="Title"
+                                    content={<ListDetail dataSource={i?.content}/>}
+                                    title={`${i?.knowledgeName}内容`}
                                     trigger="click"
                                     onVisibleChange={(visible) => handlePopoverVisibleChange(visible, i.id)}
                                 //   open={open}
                                 //   onOpenChange={handleOpenChange}
                                 >
-                                    <img id={i.id} src={require('../../file-close.png')} style={{ width: 80 }} onClick={handleClick.bind(this, i.id)} />
+                                    <img id={i.id} key={i.id} src={require('../../file-close.png')} style={{ width: 80 }} onClick={handleClick.bind(this, i.id)} />
                                 </Popover>
 
+                               <div className={styles.contentText}>
                                 <div>{i.knowledgeName}</div>
-                                <div>{i.knowledgeNum}</div>
+                                 <div>条数：{i.knowledgeNum}</div>
+                               </div>
                             </div>
                         )
                     })

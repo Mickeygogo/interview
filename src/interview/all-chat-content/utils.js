@@ -91,10 +91,10 @@ export const chatLabelTip = {
 };
 
 
-export const getCurrentUrlShareId = () => {
+export const getCurrentUrlInterviewId= () => {
   const currentUrl = window.location.href;
   const urlObject = new URL(currentUrl);
   const params = new URLSearchParams(urlObject.search);
-  const shareId = params.get('shareId');
-  return shareId;
+  const interviewId = params.get('interviewId');
+  return interviewId;
 };

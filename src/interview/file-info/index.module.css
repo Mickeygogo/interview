@@ -5,6 +5,7 @@
     padding-left:40px;
     box-sizing: border-box;
     display: flex;
+    border-top: 5px solid yellowgreen;
     /* background-color: red; */
     overflow: hidden;
 
@@ -13,6 +14,10 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自动填充列，最小宽度100px */
-    gap: 14px; /* 增加元素之间的间距 */
+    gap: 10px; /* 增加元素之间的间距 */
     overflow: auto;
+    .contentText {
+        font-size:14px;
+
+    }
 }

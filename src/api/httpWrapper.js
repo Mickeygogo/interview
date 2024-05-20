@@ -13,7 +13,6 @@ let globalApiKey = '';
 // 请求拦截器
 instance.interceptors.request.use(
   (config) => {
-
     if (globalApiKey) {
       config.headers['apiKey'] = globalApiKey;
       console.log(config, 'config');
@@ -30,13 +29,10 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
   (response) => {
-    console.log(response.headers, 'response.headers');
-
      // 假设响应返回新的 apiKey
      if (response.data?.data?.apiKeyVo?.key) {
       globalApiKey = response.data?.data?.apiKeyVo?.key;
     }
-
 
     // 检查是否是下载请求
     if (
@@ -47,18 +43,22 @@ instance.interceptors.response.use(
       return response;
     }
     if (response.data.code !== 200) {
-      console.log(response.data.msg, '前????')
-      message.error(response.data.msg);
-      console.log(response.data.msg, '后????')
+      requestIdleCallback(()=>{
+        message.error(response.data.msg);
+      })
     }
 
     // 缺少凭证
     if (response.data.code === 401) {
-      message.error(response.data.msg);
+      requestIdleCallback(()=>{
+        message.error(response.data.msg);
+      })
     }
     // 无权限用户不存在
     if (response.data.code === 403) {
-      message.error(response.data.msg);
+      requestIdleCallback(()=>{
+        message.error(response.data.msg);
+      })
     }
     // 在这里可以做一些响应后的操作
     return response;

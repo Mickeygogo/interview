@@ -11,6 +11,7 @@ import {
   useCallback,
   useRef,
   useMemo,
+  useContext
 } from 'react';
 import OriginalCitationModal from './original-citation-modal';
 import {
@@ -29,17 +30,18 @@ import {
 } from '@ant-design/icons';
 import {Send } from './send';
 import RenderContent from './render-content';
+
+import { ChatContext } from '../context';
 import {
   abortChatKnowledge,
   chatKnowledgeSSEPath,
-  queryShareDetailInfo,
+  queryInterviewInfo,
   prefixDataBeforeSSE,
 } from '../../api';
 // import CurrentChatUsage from './current-chat-usage';
 import {
   convertMarkdownToVoiceFriendlyText,
   prefix,
-  getCurrentUrlShareId,
 } from './utils';
 import styles from './index.module.css';
 
@@ -52,6 +54,10 @@ const AllChatContent = () => {
   const [conversations, setConversations] = useState([]);
   const [isLightboxOpen, setLightboxOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
+  const data = useContext(ChatContext)
+  const { interviewTitle, useModel } = data || {};
+  console.log(data, 'data');
+
   const inputTextRef = useRef({});
   // streamId
   const streamIdRef = useRef(uuidV4());
@@ -59,10 +65,8 @@ const AllChatContent = () => {
   const currentChatUsage = useRef();
   // 知识库来源信息
   const currentKnowledgeSource = useRef();
-  const shareId = getCurrentUrlShareId();
   // 取消播放
   const lastScrollHeight = useRef(0); // 用于保存上一次的scrollHeight
-  const requestDataRef = useRef();
   // 获取sse传过来的旧值
   const prevSSEMessage = useRef();
   const originalCitationModalRef = useRef();
@@ -85,24 +89,23 @@ const AllChatContent = () => {
   }, []);
 
   useEffect(() => {
-    queryShareDetailInfo({ shareId }).then(res => {
-      requestDataRef.current = res.data.data;
-      console.log(res.data.data, '数据');
-      if(conversations?.length === 0){
+      if(conversations?.length === 0 && data){
         setConversations([ {
           id: uuidV4(),
-          copyText: res.data.data.startText,
+          copyText:data?.startText,
           isRunning: true,
-          voiceText:res.data.data.startText,
+          voiceText:data?.startText,
           role: 'assistant',
-          content:res.data.data.startText,
+          content:data?.startText,
           isAssistant: true,
          },])
+      } else {
+        setConversations([])
       }
-    }).catch(err=>{
-      setConversations([])
-    })
-  }, [conversations?.length, shareId])
+    // }).catch(err=>{
+    //   setConversations([])
+    // })
+  }, [data])
 
   const handleOpenKnowledgeSource = (data) => {
     originalCitationModalRef.current.open(data);
@@ -115,20 +118,16 @@ const AllChatContent = () => {
     }
     // TODO要转码下，不然问1+1 显示的是 1 1 因为经过url + 号被识别成空格了
     // const enPrompt = encodeURIComponent(prompt);
-    console.log(requestDataRef.current?.apiKeyVo?.key, '数据在这里');
 
     eventSourceRef.current = new EventSource(
       chatKnowledgeSSEPath +
         // `?prompt=${'你好啊'}` +
-        `?model=${requestDataRef.current?.useModel?.value}` +
+        `?model=${data?.useModel?.value}` +
         `&historyNum=${0}` +
-        `&streamId=${streamIdRef.current}&type=Gpts&apiKey=${requestDataRef.current?.apiKeyVo?.key}`,
+        `&streamId=${streamIdRef.current}&type=Gpts&apiKey=${data?.apiKeyVo?.key}`,
       {
         // 携带cookie
         withCredentials: true,
-        // headers: {
-        //   'ApiKey': requestDataRef.current?.apiKeyVo?.key,
-        // },
       }
     );
 
@@ -254,7 +253,7 @@ const AllChatContent = () => {
     };
 
     return () => eventSourceRef.current.close();
-  }, []);
+  }, [data?.apiKeyVo?.key, data?.useModel?.value]);
 
   const handleSend = useCallback(
     (message) => {
@@ -307,7 +306,7 @@ const AllChatContent = () => {
                 content: newMessage,
               },
             ],
-          knowledgeUuidArr:requestDataRef.current?.callKnowledge?.map(i=>i?.key?.split('-')[0]),
+          knowledgeUuidArr:data?.callKnowledge?.map(i=>i?.key?.split('-')[0]),
           knowledgeNum:2,
           temperature:0.1,
           max_tokens:1024,
@@ -315,10 +314,7 @@ const AllChatContent = () => {
         startSSE();
       });
     },
-    [
-      conversations,
-      startSSE,
-    ]
+    [conversations, data?.callKnowledge, startSSE]
   );
 
   const handleSearch = (value) => {
@@ -501,19 +497,10 @@ const AllChatContent = () => {
                 </div>
               )}
               <div className={styles.messageContent}>
-                {/* {item?.chatUsage && (
-                  <Popover
-                    style={{ width: '50%' }}
-                    placement="topRight"
-                    content={<CurrentChatUsage dataSource={item?.chatUsage} />}
-                  >
-                    <DollarOutlined className={styles.chatUsageMoneyIcon} />
-                  </Popover>
-                )} */}
 
                 <Watermark
-                  content={item.modalType}
-                  rotate={-10}
+                  content={useModel.value}
+                  rotate={-4}
                   font={{ color: 'rgba(0,0,0,.3)', fontSize: 14 }}
                 >
                   <RenderContent
@@ -537,8 +524,8 @@ const AllChatContent = () => {
   );
 
   const renderTitle = useMemo(() => {
-    return 'AI Message  Chat'
-  }, []);
+    return interviewTitle
+  }, [interviewTitle]);
 
   return (
     <div className={styles.container} id="all-chat-content-modal-id" >

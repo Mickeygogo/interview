@@ -5,11 +5,14 @@ import http from './httpWrapper';
 //   import.meta.env.VITE_APP_API_BASE_URL
 // }/third-parties/chat-knowledge`;
 
+console.log(process.env, 'process.env');
+
 export const chatKnowledgeSSEPath = `${process.env.REACT_APP_ROUTER_BASE_URL}/third-parties/chat-knowledge`;
 
-export const queryShareDetailInfo = (params, config) => {
-  return http.post(`${process.env.REACT_APP_ROUTER_BASE_URL}/no-auth/query-shareDetailInfo`, params, config);
+export const queryInterviewInfo = (params, config) => {
+  return http.post(`${process.env.REACT_APP_ROUTER_BASE_URL}/no-auth/query-interview-info`, params, config);
 };
+
 
 export const abortChatKnowledge = (params) => {
   return http.get(
@@ -23,4 +26,7 @@ export const prefixDataBeforeSSE = (params) => {
     `${process.env.REACT_APP_ROUTER_BASE_URL}/third-parties/prefix-data-before-sse`,
     params
   );
+};
+export const emailToAuthor = (params, config) => {
+  return http.post(`${process.env.REACT_APP_ROUTER_BASE_URL}/no-auth/email-to-author`, params, config);
 };

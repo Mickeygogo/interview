@@ -2,11 +2,13 @@
     display: flex;
     flex: 1;
     box-sizing: border-box;
+    /* border: 5px solid yellowgreen; */
 }
 .left {
     flex: 1;
     box-sizing: border-box;
     border-right: 5px solid yellowgreen;
+
 }
 .right {
     flex: 2;
@@ -22,4 +24,8 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+}
+:global(.ant-float-btn-body ){
+    background-color: #997b66 !important;
+
 }
