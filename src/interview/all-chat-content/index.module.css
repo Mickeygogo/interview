@@ -50,9 +50,9 @@ align-items: center;
     z-index: 100;
   }
   .aiContainer {
-    overflow: scroll;
+    overflow: auto;
     width: 90%;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 180px);
     box-sizing: border-box;
     padding: 40px 0;
     :global(.ant-list-empty-text) {

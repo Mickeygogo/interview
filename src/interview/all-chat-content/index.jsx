@@ -151,7 +151,7 @@ const AllChatContent = () => {
       }
 
       if (messageContent.includes('[OriginalCitation]')) {
-        if (messageContent?.split('-¥¥¥&$$$-')?.[1]) {
+        if (messageContent?.split('-¥¥¥&$$$-')?.[1] &&  messageContent?.split('-¥¥¥&$$$-')?.[1] !== 'undefined') {
           currentKnowledgeSource.current = JSON.parse(
             messageContent?.split('-¥¥¥&$$$-')?.[1]
           );
@@ -542,7 +542,7 @@ const AllChatContent = () => {
       </div>
       <div className={styles.search}>
         <Send
-                placeholder="输入文字"
+                placeholder="同时按下enter&shift会发送"
                 allowClear
                 className={styles.searchSend}
                 enterButton="发送"
