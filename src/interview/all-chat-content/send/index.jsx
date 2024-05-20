@@ -82,7 +82,7 @@ export function Send({
             maxRows: 3,
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && e.shiftKey) {
+            if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault(); // 阻止默认行为，防止换行
               setValue('');
               onSearch?.(); // 触发发送事件

@@ -542,7 +542,7 @@ const AllChatContent = () => {
       </div>
       <div className={styles.search}>
         <Send
-                placeholder="同时按下enter&shift会发送"
+                placeholder="同时按下enter&shift可进行换行 / 单点enter发送"
                 allowClear
                 className={styles.searchSend}
                 enterButton="发送"
