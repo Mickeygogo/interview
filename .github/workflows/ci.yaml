@@ -19,14 +19,14 @@ jobs:
       with:
         node-version: '18.16' # 或者你项目中使用的任何其他版本
 
-    - name: Install pnpm
-      run: npm install -g pnpm@7.1.9
+    - name: Install npm
+      run: npm install -g npm@9.5.1
 
     - name: Install dependencies
-      run: pnpm install
+      run: npm install
 
     - name: Build
-      run: pnpm run build
+      run: npm run build
 
     # 添加SSH主机密钥到已知主机列表
     - name: Setup SSH Known Hosts
