@@ -1,0 +1,48 @@
+name: Deploy to Aliyun Server
+
+on:
+  push:
+    branches:
+      - main  # 或你的默认分支
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL  }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18.16' # 或者你项目中使用的任何其他版本
+
+    - name: Install pnpm
+      run: npm install -g pnpm@7.1.9
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Build
+      run: pnpm run build
+
+    # 添加SSH主机密钥到已知主机列表
+    - name: Setup SSH Known Hosts
+      run: |
+        mkdir -p ~/.ssh
+        touch ~/.ssh/known_hosts
+        echo "${{ secrets.SSH_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+      shell: bash
+
+    # 通过SCP复制构建文件到服务器
+    - name: Deploy to Server
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SERVER_IP }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SERVER_SSH_KEY }}
+        port: 22
+        source: "build/*"
+        target: "/path/to/nginx/data/INTERVIEW/"
