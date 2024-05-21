@@ -36,6 +36,7 @@ instance.interceptors.response.use(
 
     // 检查是否是下载请求
     if (
+       
       response.headers['content-type'] ===
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {

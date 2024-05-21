@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { isEmpty } from 'lodash-es';
 
 export const useChatConfig = () => {

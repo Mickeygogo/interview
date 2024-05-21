@@ -4,6 +4,7 @@ import parse from 'remark-parse';
 import { visit } from 'unist-util-visit';
 
 function preprocessString(str) {
+  // eslint-disable-next-line
   return str?.replace(/\\\"/g, '"')?.replace(/\\\\/g, '\\');
 }
 
