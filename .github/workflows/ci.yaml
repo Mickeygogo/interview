@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL  }}
+      REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -46,3 +46,4 @@ jobs:
         port: 22
         source: "build/*"
         target: "/path/to/nginx/data/INTERVIEW/"
+        debug: true  # 启用调试信息
