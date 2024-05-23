@@ -500,8 +500,8 @@ const AllChatContent = () => {
 
                 <Watermark
                   content={useModel.value}
-                  rotate={-4}
-                  font={{ color: 'rgba(0,0,0,.3)', fontSize: 14 }}
+                  rotate={4}
+                  font={{ color: 'rgba(0,0,0,.1)', fontSize: 14 }}
                 >
                   <RenderContent
                   type={item.role}
