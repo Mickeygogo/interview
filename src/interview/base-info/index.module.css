@@ -9,7 +9,7 @@
     padding-bottom:4px;
     .baseInfo {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 自动填充列，最小宽度100px */
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* 自动填充列，最小宽度100px */
         gap: 16px; /* 增加元素之间的间距 */
         overflow: auto;
 
