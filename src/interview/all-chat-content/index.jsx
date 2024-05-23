@@ -470,7 +470,7 @@ const AllChatContent = () => {
                 className={styles.avatar}
               >YOU</Avatar>
             ) : (
-              <Avatar className={styles.avatar}>AI</Avatar>
+              <Avatar className={styles.avatar} src='//wimg.588ku.com/gif620/21/01/03/0b98c83450ae48de1c60a4a3bdac59ea.gif'></Avatar>
             )}
             <div className={styles.contentWrapper}>
               <div className={styles.titleInfo}>
