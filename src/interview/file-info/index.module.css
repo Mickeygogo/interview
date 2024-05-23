@@ -1,3 +1,10 @@
+/*
+ * @Author: Mcikey
+ * @Date: 2024-05-14 20:03:11
+ * @LastEditors: hyman
+ * @LastEditTime: 2024-05-23 10:28:03
+ * @Description: 请填写简介
+ */
 .container {
     width: 100%;
     height:30vh;
@@ -5,7 +12,7 @@
     padding-left:40px;
     box-sizing: border-box;
     display: flex;
-    border-top: 5px solid yellowgreen;
+    border-top: 5px solid #997b66;
     /* background-color: red; */
     overflow: hidden;
 
@@ -16,8 +23,21 @@
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自动填充列，最小宽度100px */
     gap: 10px; /* 增加元素之间的间距 */
     overflow: auto;
-    .contentText {
-        font-size:14px;
-
+    .imgWrapper {
+        position: relative;
+        .contentText {
+            position: absolute;
+            font-size:10px;
+            width: 80px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow:hidden;
+            bottom:4px;
+            right:0;
+            text-align: right;
+            box-sizing: border-box;
+        }
     }
+
+
 }

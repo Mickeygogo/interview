@@ -1,6 +1,6 @@
 import { List } from 'antd';
 
-const ListDetail = ({ dataSource }) =>{
+const ListDetail = ({ dataSource, fileCount }) =>{
   return (
     <>
        <List

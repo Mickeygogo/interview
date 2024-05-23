@@ -1,0 +1,17 @@
+
+
+.container {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top:10px;
+    margin-bottom:20px;
+    .SubTitle {
+        width: 8px;
+        height: 30px;
+        background: #997b66;
+        margin-right: 10px;
+
+    }
+}

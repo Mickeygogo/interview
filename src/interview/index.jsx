@@ -16,6 +16,7 @@ import {
 import {
   queryInterviewInfo,
 } from '../api';
+import BaseInfo from './base-info';
 import { ChatContext } from './context';
 import ChatToEmail from './chat-to-email'
 import {
@@ -48,6 +49,7 @@ const Interview = () => {
         <div className={styles.container}>
           <div className={styles.left}>
             <PersonImgInfo />
+            <BaseInfo/>
             <FileInfo />
           </div>
           <div className={styles.right}></div>
