@@ -15,7 +15,6 @@ instance.interceptors.request.use(
   (config) => {
     if (globalApiKey) {
       config.headers['apiKey'] = globalApiKey;
-      console.log(config, 'config');
     }
 
     return config;
@@ -36,7 +35,7 @@ instance.interceptors.response.use(
 
     // 检查是否是下载请求
     if (
-       
+
       response.headers['content-type'] ===
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     ) {

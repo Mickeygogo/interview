@@ -56,8 +56,6 @@ const AllChatContent = () => {
   const [currentImage, setCurrentImage] = useState('');
   const data = useContext(ChatContext)
   const { interviewTitle, useModel } = data || {};
-  console.log(data, 'data');
-
   const inputTextRef = useRef({});
   // streamId
   const streamIdRef = useRef(uuidV4());
@@ -168,7 +166,6 @@ const AllChatContent = () => {
         let clearText = chatContentRef.current;
         let knowledgeSource = currentKnowledgeSource.current;
 
-        console.log(knowledgeSource, 'knowledgeSource');
 
         const formatContent = convertMarkdownToVoiceFriendlyText(clearText);
         //todo 暂时不支持语音播放
@@ -200,13 +197,11 @@ const AllChatContent = () => {
           const updatedConversations =cloneDeep(prevConversations);
           const lastMessage =
             updatedConversations[updatedConversations.length - 1];
-            console.log(messageContent,'lastMessage外')
 
           // 如果最后一条消息是assistant的消息，更新它
           if (lastMessage && lastMessage.role === 'assistant') {
             lastMessage.content = messageBuffer;
             lastAssistantMessageId = lastMessage.id;
-            console.log(messageBuffer, 'messageBuffer')
             chatContentRef.current = lastMessage.content;
           } else {
             // 否则，添加一个新的消息
@@ -259,12 +254,10 @@ const AllChatContent = () => {
     (message) => {
       setLoading(true);
       // 每次发送消息后，重新启动一个新的 EventSource 连接
-      console.log(uploadFiles.current.file, '文件有数据');
       const newMessage = message;
 
       setConversations((prevConversations) => {
 
-        console.log(newMessage, 'newMessage');
         const newArr = [
           ...prevConversations,
           {
@@ -457,7 +450,6 @@ const AllChatContent = () => {
   // 渲染元素
   const renderChatNode = useCallback(
     (item) => {
-      console.log('触发了');
       return (
         <div
           className={

@@ -28,8 +28,6 @@ const OriginalCitationModal = forwardRef(({}, ref) => {
   const feedbackValueRef = useRef([]);
   const [api, contextHolder] = notification.useNotification();
 
-  console.log(data, 'data');
-
   useImperativeHandle(
     ref,
     () => ({

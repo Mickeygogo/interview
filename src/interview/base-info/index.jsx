@@ -19,7 +19,6 @@ export default function BaseInfo() {
                 let [key, value] = pair.split('：');
                 return { label: key?.trim(), value: value?.trim() }; // 创建对象，并确保去除额外的空格
             });
-            console.log(dataArray);
             return dataArray;
         } catch (error) {
             console.error('JSON 解析失败:', error);

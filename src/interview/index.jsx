@@ -32,7 +32,6 @@ const Interview = () => {
 
   useEffect(() => {
     queryInterviewInfo({ interviewId }).then(res => {
-      console.log(res.data.data, 'res.data.data');
       setData(res.data.data)
     })
   }, [interviewId])

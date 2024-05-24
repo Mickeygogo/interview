@@ -6,12 +6,7 @@ export const useChatConfig = () => {
     currentLLMConfig,
     defaultConfig,
   }) => {
-    console.log(
-      globalLLMConfig,
-      currentLLMConfig,
-      { ...defaultConfig },
-      '我的数据'
-    );
+
     if (!isEmpty(globalLLMConfig)) {
       // TODO 全局回话配置
       const {

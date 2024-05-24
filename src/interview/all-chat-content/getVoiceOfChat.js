@@ -114,7 +114,6 @@ async function initializeWebSocket(text, vcn, callback) {
 
 // 传输数据
 function send(otherServerSocket, text, vcn = 'aisjiuxu') {
-  console.log(text, 'text');
   let frame = {
     // 填充common
     common: {

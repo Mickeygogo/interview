@@ -90,7 +90,6 @@ const renderAlert = {
 };
 
 export default function CurrentChatUsage({ dataSource }) {
-  console.log(dataSource, 'dataSource');
   return (
     <div className={styles.currentChatUsage} style={{ paddingBottom: 24 }}>
       <Divider orientation="center">费用计算方式：</Divider>

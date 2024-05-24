@@ -68,10 +68,6 @@ export function Send({
     };
   }, []);
 
-  console.log(isComposing, '数据显示');
-
-
-
   const handleChange = useCallback(
     (e) => {
       const data = e.target.value;
