@@ -5,7 +5,7 @@
  * @LastEditTime: 2024-03-31 19:37:54
  * @Description: 请填写简介
  */
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef} from 'react';
 import classnames from 'classnames';
 import { Input, Button, Image, message, Tooltip, Spin } from 'antd';
 import {
@@ -42,8 +42,33 @@ export function Send({
   // const [isLoading, setLoading] = useState(false);
 
   const [value, setValue] = useState('');
+  const [isComposing, setIsComposing] = useState(false);
+  const baseInputRef = useRef(null);
 
+  useEffect(() => {
+    const handleCompositionStart = () => {
+      setIsComposing(true);
+    };
 
+    const handleCompositionEnd = () => {
+      setIsComposing(false);
+    };
+
+    const inputElement = baseInputRef.current?.resizableTextArea?.textArea;
+    if (inputElement) {
+      inputElement?.addEventListener?.('compositionstart', handleCompositionStart);
+      inputElement?.addEventListener?.('compositionend', handleCompositionEnd);
+    }
+
+    return () => {
+      if (inputElement) {
+        inputElement?.removeEventListener?.('compositionstart', handleCompositionStart);
+        inputElement?.removeEventListener?.('compositionend', handleCompositionEnd);
+      }
+    };
+  }, []);
+
+  console.log(isComposing, '数据显示');
 
 
 
@@ -72,7 +97,12 @@ export function Send({
     >
       <div className={styles.textAreaWrapper}>
         <TextArea
-          ref={inputRef}
+           ref={(ref) => {
+            if (inputRef?.current) {
+              inputRef.current = ref;
+            }
+            baseInputRef.current = ref;
+          }}
           value={value}
           className={styles.textArea}
           placeholder={placeholder}
@@ -82,7 +112,7 @@ export function Send({
             maxRows: 3,
           }}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+            if (e.key === 'Enter' && !e.shiftKey && !isComposing) {
               e.preventDefault(); // 阻止默认行为，防止换行
               setValue('');
               onSearch?.(); // 触发发送事件
